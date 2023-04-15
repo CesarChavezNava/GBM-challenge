@@ -12,7 +12,7 @@ public class Operation : ValueObject<OperationCode>
 
     protected override void Check(OperationCode value)
     {
-        if(value != OperationCode.BUY && value != OperationCode.SELL)
+        if (!Enum.IsDefined(typeof(OperationCode), value))
             throw new InvalidOrderOperationException();
     }
 }
