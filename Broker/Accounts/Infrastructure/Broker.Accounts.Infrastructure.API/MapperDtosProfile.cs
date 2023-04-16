@@ -18,7 +18,7 @@ public class MapperDtosProfile : Profile
             .ForMember(dto => dto.Cash, entity => entity.MapFrom(vo => vo.Cash.Value))
             .ForMember(dto => dto.Issuers, entity => entity.MapFrom(src => src.Issuers.ToArray()));
 
-        CreateMap<Balance, BalanceDto>()
+        CreateMap<Account, BalanceDto>()
             .ForMember(dto => dto.Cash, entity => entity.MapFrom(vo => vo.Cash.Value))
             .ForMember(dto => dto.Issuers, entity => entity.MapFrom(src => src.Issuers.ToArray()));
     }
