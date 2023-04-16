@@ -15,17 +15,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{AFF84863-1217-4057-AC53-828203B390CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Broker.Core", "Shared\Domain\Broker.Core\Broker.Core.csproj", "{97F95E00-9977-4598-8AA0-DE5A274C45C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Broker.Core", "Shared\Domain\Broker.Core\Broker.Core.csproj", "{97F95E00-9977-4598-8AA0-DE5A274C45C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Broker.Accounts.Domain", "Accounts\Domain\Broker.Accounts.Domain\Broker.Accounts.Domain.csproj", "{5A7CEABC-F266-416A-8E36-835F913B8DE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Broker.Accounts.Domain", "Accounts\Domain\Broker.Accounts.Domain\Broker.Accounts.Domain.csproj", "{5A7CEABC-F266-416A-8E36-835F913B8DE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Broker.Accounts.Application", "Accounts\Application\Broker.Accounts.Application\Broker.Accounts.Application.csproj", "{4597043A-45D8-479E-9135-3937C58AA770}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Broker.Accounts.Application", "Accounts\Application\Broker.Accounts.Application\Broker.Accounts.Application.csproj", "{4597043A-45D8-479E-9135-3937C58AA770}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Broker.Accounts.SQLRepository", "Accounts\Infrastructure\Broker.Accounts.SQLRepository\Broker.Accounts.SQLRepository.csproj", "{7DE7BA6C-E027-4ED6-BACF-B93AB70DE482}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Broker.Accounts.Infrastructure.SQL", "Accounts\Infrastructure\Broker.Accounts.Infrastructure.SQL\Broker.Accounts.Infrastructure.SQL.csproj", "{7DE7BA6C-E027-4ED6-BACF-B93AB70DE482}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Broker.Accounts.API", "Accounts\Infrastructure\Broker.Accounts.API\Broker.Accounts.API.csproj", "{052D2355-2A60-49AA-BA64-C5C29A1BFFFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Broker.Accounts.Infrastructure.API", "Accounts\Infrastructure\Broker.Accounts.Infrastructure.API\Broker.Accounts.Infrastructure.API.csproj", "{052D2355-2A60-49AA-BA64-C5C29A1BFFFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Broker.Accounts.Domain.Tests", "Accounts\Domain\Broker.Accounts.Domain.Tests\Broker.Accounts.Domain.Tests.csproj", "{DA42D3B4-E81E-4212-B96D-F53D7F2D047A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Broker.Accounts.Domain.Tests", "Accounts\Domain\Broker.Accounts.Domain.Tests\Broker.Accounts.Domain.Tests.csproj", "{DA42D3B4-E81E-4212-B96D-F53D7F2D047A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,4 @@
-﻿namespace Broker.Accounts.API.Dtos;
+﻿namespace Broker.Accounts.Infrastructure.API.Dtos;
 
 public class AccountDto
 {

@@ -1,7 +1,7 @@
-﻿using Broker.Accounts.SQLRepository.Schemas;
+﻿using Broker.Accounts.Infrastructure.SQL.Schemas;
 using Microsoft.EntityFrameworkCore;
 
-namespace Broker.Accounts.SQLRepository;
+namespace Broker.Accounts.Infrastructure.SQL;
 
 public class AccountContext : DbContext
 {

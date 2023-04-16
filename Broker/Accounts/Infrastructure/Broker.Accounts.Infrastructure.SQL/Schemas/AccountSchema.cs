@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Broker.Accounts.SQLRepository.Schemas;
+namespace Broker.Accounts.Infrastructure.SQL.Schemas;
 
 
 [Table("ACCOUNT")]

@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Broker.Accounts.API.Dtos;
 using Broker.Accounts.Domain.Entities.Read;
+using Broker.Accounts.Infrastructure.API.Dtos;
 
-namespace Broker.Accounts.API;
+namespace Broker.Accounts.Infrastructure.API;
 
 public class MapperDtosProfile : Profile
 {

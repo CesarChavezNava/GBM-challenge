@@ -23,7 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Application\Broker.Accounts.Application\Broker.Accounts.Application.csproj" />
-    <ProjectReference Include="..\Broker.Accounts.SQLRepository\Broker.Accounts.SQLRepository.csproj" />
+    <ProjectReference Include="..\Broker.Accounts.Infrastructure.SQL\Broker.Accounts.Infrastructure.SQL.csproj" />
   </ItemGroup>
 
 </Project>

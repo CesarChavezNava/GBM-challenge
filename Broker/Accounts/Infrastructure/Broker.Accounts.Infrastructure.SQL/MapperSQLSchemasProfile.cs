@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Broker.Accounts.Domain.Entities.Write;
-using Broker.Accounts.SQLRepository.Schemas;
+using Broker.Accounts.Infrastructure.SQL.Schemas;
 
-namespace Broker.Accounts.SQLRepository;
+namespace Broker.Accounts.Infrastructure.SQL;
 
 public class MapperSQLSchemasProfile : Profile
 {

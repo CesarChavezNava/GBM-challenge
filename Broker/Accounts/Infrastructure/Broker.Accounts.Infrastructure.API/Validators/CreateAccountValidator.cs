@@ -1,7 +1,7 @@
-﻿using Broker.Accounts.API.Dtos;
+﻿using Broker.Accounts.Infrastructure.API.Dtos;
 using FluentValidation;
 
-namespace Broker.Accounts.API.Validators;
+namespace Broker.Accounts.Infrastructure.API.Validators;
 
 public class CreateAccountValidator : AbstractValidator<CreateAccountDto>
 {

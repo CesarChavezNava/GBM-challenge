@@ -1,9 +1,9 @@
 using AutoMapper;
-using Broker.Accounts.API;
 using Broker.Accounts.Application.Create;
 using Broker.Accounts.Domain.Repositories;
-using Broker.Accounts.SQLRepository;
-using Broker.Accounts.SQLRepository.Repositories;
+using Broker.Accounts.Infrastructure.API;
+using Broker.Accounts.Infrastructure.SQL;
+using Broker.Accounts.Infrastructure.SQL.Repositories;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 

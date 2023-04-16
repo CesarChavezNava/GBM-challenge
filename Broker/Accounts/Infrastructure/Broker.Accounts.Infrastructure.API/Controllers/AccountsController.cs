@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using Broker.Accounts.API.Dtos;
 using Broker.Accounts.Application.Create;
 using Broker.Accounts.Domain.Entities.Read;
 using Broker.Accounts.Domain.Entities.Write;
 using Broker.Accounts.Domain.ValueObjects;
+using Broker.Accounts.Infrastructure.API.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Broker.Accounts.API.Controllers;
+namespace Broker.Accounts.Infrastructure.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]

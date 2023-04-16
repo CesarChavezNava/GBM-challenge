@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Broker.Accounts.API.Controllers
+namespace Broker.Accounts.Infrastructure.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]

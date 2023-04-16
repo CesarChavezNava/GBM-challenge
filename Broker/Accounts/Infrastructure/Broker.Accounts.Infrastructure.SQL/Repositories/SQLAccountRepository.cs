@@ -3,9 +3,9 @@ using Broker.Accounts.Domain.Entities.Read;
 using Broker.Accounts.Domain.Entities.Write;
 using Broker.Accounts.Domain.Repositories;
 using Broker.Accounts.Domain.ValueObjects;
-using Broker.Accounts.SQLRepository.Schemas;
+using Broker.Accounts.Infrastructure.SQL.Schemas;
 
-namespace Broker.Accounts.SQLRepository.Repositories;
+namespace Broker.Accounts.Infrastructure.SQL.Repositories;
 
 public class SQLAccountRepository : IAccountRepository
 {

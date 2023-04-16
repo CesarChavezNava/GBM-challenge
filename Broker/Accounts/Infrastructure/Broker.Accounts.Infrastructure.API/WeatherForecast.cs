@@ -1,4 +1,4 @@
-namespace Broker.Accounts.API
+namespace Broker.Accounts.Infrastructure.API
 {
     public class WeatherForecast
     {
