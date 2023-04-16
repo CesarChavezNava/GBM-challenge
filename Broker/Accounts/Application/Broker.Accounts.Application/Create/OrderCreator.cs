@@ -9,15 +9,12 @@ namespace Broker.Accounts.Application.Create;
 public class OrderCreator : IForCreateOrder
 {
     private readonly IAccountRepository accountRepository;
-    private readonly IIssuerRepository issuerRepository;
     private readonly IOrderRepository orderRepository;
     public OrderCreator(
         IAccountRepository accountRepository,
-        IIssuerRepository issuerRepository,
         IOrderRepository orderRepository)
     {
         this.accountRepository = accountRepository;
-        this.issuerRepository = issuerRepository;
         this.orderRepository = orderRepository;
     }
 

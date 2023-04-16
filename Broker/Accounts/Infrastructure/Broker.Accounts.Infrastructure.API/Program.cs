@@ -49,7 +49,6 @@ builder.Services
 #region Repositories
 
 builder.Services.AddScoped<IAccountRepository, SQLAccountRepository>();
-builder.Services.AddScoped<IIssuerRepository, SQLIssuerRepository>();
 builder.Services.AddScoped<IOrderRepository, SQLOrderRepository>();
 
 #endregion Repositories
