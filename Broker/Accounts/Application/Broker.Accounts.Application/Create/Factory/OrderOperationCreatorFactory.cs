@@ -9,7 +9,7 @@ public static class OrderOperationCreatorFactory
     public static IOrderOperationCreator Create(Operation operation)
     {
         string operationCode = operation.Value.ToString().ToLower();
-        string className = $"{char.ToUpper(operationCode[0])}{operationCode.Substring(1)}Creator";
+        string className = $"Order{char.ToUpper(operationCode[0])}{operationCode.Substring(1)}Creator";
         string fullyQualifiedName = $"{NAMESPACE}.{className}";
 
         return (IOrderOperationCreator)Activator.CreateInstance(Type.GetType(fullyQualifiedName));

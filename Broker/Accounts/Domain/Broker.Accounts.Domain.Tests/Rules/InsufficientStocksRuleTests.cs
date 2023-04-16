@@ -31,8 +31,8 @@ public class InsufficientStocksRuleTests
             )
         );
 
-        Balance currentBalance = new(new Cash(1000), issuers);
-        rule = new(currentBalance);
+        Account account = new(new(1), new(1000), issuers);
+        rule = new(account);
     }
 
     [Test(Description = "Too low stocks, should return INSUFFICIENT_STOCKS")]

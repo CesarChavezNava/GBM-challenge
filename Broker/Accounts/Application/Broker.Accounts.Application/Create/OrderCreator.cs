@@ -21,10 +21,9 @@ public class OrderCreator : IForCreateOrder
     public async Task<Account> Create(WriteOrder order)
     {
         Account account = await accountRepository.Find(order.UserId);
+        IOrderOperationCreator operationCreator = OrderOperationCreatorFactory.Create(order.Operation);
 
         await orderRepository.Create(order);
-
-        IOrderOperationCreator operationCreator = OrderOperationCreatorFactory.Create(order.Operation);
 
         WriteIssuer issuer = operationCreator.CreateIssuerForCommand(EvaluateIssuer(account, order), order);
         Cash currentCash = operationCreator.CalculateCurrentCash(account.Cash, order);

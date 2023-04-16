@@ -13,8 +13,6 @@ public class OrderBuyCreator : IOrderOperationCreator
 
     public WriteIssuer CreateIssuerForCommand(WriteIssuer issuer, WriteOrder order)
     {
-        return issuer.CreateWriteIssuerForBuyOperation(
-            new(order.TotalShares.Value),
-            new(order.SharePrice.Value));
+        return issuer.CreateWriteIssuerForBuyOperation(order.TotalShares, order.SharePrice);
     }
 }

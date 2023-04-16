@@ -7,16 +7,16 @@ namespace Broker.Accounts.Domain.Rules;
 /// <summary>
 /// When selling stocks, you must have enough stocks in order to fulfill it
 /// </summary>
-public class InsufficientStocksRule : DependentBusinessRule<WriteOrder, Balance>
+public class InsufficientStocksRule : DependentBusinessRule<WriteOrder, Account>
 {
-	public InsufficientStocksRule(Balance currentBalance)
-		: base("INSUFFICIENT_STOCKS", additionalData: currentBalance, contextsToExecute: new string[] { "SELL" })
+	public InsufficientStocksRule(Account account)
+		: base("INSUFFICIENT_STOCKS", additionalData: account, contextsToExecute: new string[] { "SELL" })
 	{ }
 
-    protected override bool Validate(WriteOrder order, Balance currentBalance)
+    protected override bool Validate(WriteOrder order, Account account)
     {
         Issuer? issuer =
-            currentBalance.Issuers.FirstOrDefault(issuer => issuer.IssuerName.Value.Equals(order.IssuerName.Value));
+            account.Issuers.FirstOrDefault(issuer => issuer.IssuerName.Value.Equals(order.IssuerName.Value));
 
         if (issuer is null)
             return false;

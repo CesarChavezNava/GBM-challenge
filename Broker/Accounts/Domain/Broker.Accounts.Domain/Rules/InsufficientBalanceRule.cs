@@ -7,15 +7,15 @@ namespace Broker.Accounts.Domain.Rules;
 /// <summary>
 /// When buying stocks, you must have enough cash in order to fulfill it.
 /// </summary>
-public class InsufficientBalanceRule : DependentBusinessRule<WriteOrder, Balance>
+public class InsufficientBalanceRule : DependentBusinessRule<WriteOrder, Account>
 {
-    public InsufficientBalanceRule(Balance currentBalance)
-        : base("INSUFFICIENT_BALANCE", additionalData: currentBalance, contextsToExecute: new string[] { "BUY" })
+    public InsufficientBalanceRule(Account account)
+        : base("INSUFFICIENT_BALANCE", additionalData: account, contextsToExecute: new string[] { "BUY" })
     { }
 
-    protected override bool Validate(WriteOrder order, Balance currentBalance)
+    protected override bool Validate(WriteOrder order, Account account)
     {
         decimal total = order.TotalShares.Value * order.SharePrice.Value;
-        return currentBalance.Cash.Value >= total;
+        return account.Cash.Value >= total;
     }
 }

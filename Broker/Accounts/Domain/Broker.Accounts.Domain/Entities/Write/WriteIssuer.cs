@@ -30,14 +30,14 @@ public class WriteIssuer
 
     public WriteIssuer CreateWriteIssuerForSellOperation(TotalShares totalShares, SharePrice sharePrice)
     {
-        int _totalShares = this.TotalShares.Value - totalShares.Value;
-        decimal _sharePrice = (this.SharePrice.Value + sharePrice.Value) / _totalShares;
+        int currentTotalShares = TotalShares.Value - totalShares.Value;
+        decimal averageSharePrice = (SharePrice.Value + sharePrice.Value) / currentTotalShares;
 
         return new WriteIssuer(
-                new(this.UserId.Value),
-                new(this.IssuerName.Value),
-                new(_totalShares),
-                new(_sharePrice)
+                UserId,
+                IssuerName,
+                new(currentTotalShares),
+                new(averageSharePrice)
             );
     }
 
@@ -46,14 +46,14 @@ public class WriteIssuer
         if (!Exists)
             return this;
 
-        int _totalShares = this.TotalShares.Value + totalShares.Value;
-        decimal _sharePrice = (this.SharePrice.Value + sharePrice.Value) / _totalShares;
+        int currentTotalShares = TotalShares.Value + totalShares.Value;
+        decimal averageSharePrice = (SharePrice.Value + sharePrice.Value) / currentTotalShares;
 
         return new WriteIssuer(
-                new(this.UserId.Value),
-                new(this.IssuerName.Value),
-                new(_totalShares),
-                new(_sharePrice),
+                UserId,
+                IssuerName,         
+                new(currentTotalShares),
+                new(averageSharePrice),
                 this.Exists
             );
     }

@@ -15,8 +15,8 @@ public class InsufficientBalanceRuleTests
     [SetUp]
     public void SetUp()
     {
-        Balance currentBalance = new(new Cash(1040), new Issuers());
-        rule = new(currentBalance);
+        Account account = new(new(1), new(1040), new Issuers());
+        rule = new(account);
     }
 
     [Test(Description = "Too Low Balance, should return INSUFFICIENT_BALANCE")]
