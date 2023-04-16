@@ -10,9 +10,23 @@ public class AccountContext : DbContext
     { }
 
     public DbSet<AccountSchema> Accounts { get; set; }
+    public DbSet<AccountIssuerSchema> Issuers { get; set; }
+    public DbSet<AccountOrderSchema> Orders { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<AccountIssuerSchema>().HasKey(table => new
+        {
+            table.UserId,
+            table.IssuerName
+        });
+
+        modelBuilder.Entity<AccountOrderSchema>().HasKey(table => new
+        {
+            table.UserId,
+            table.OrderId
+        });
     }
 }

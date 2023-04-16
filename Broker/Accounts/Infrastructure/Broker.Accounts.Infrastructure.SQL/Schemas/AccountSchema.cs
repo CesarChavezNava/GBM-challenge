@@ -14,4 +14,7 @@ public class AccountSchema
 
     [Column("Balance", TypeName = "decimal(12, 2)")]
     public decimal Balance { get; set; }
+
+    public virtual ICollection<AccountIssuerSchema>? Issuers { get; set; }
+    public virtual ICollection<AccountOrderSchema>? Orders { get; set; }
 }
