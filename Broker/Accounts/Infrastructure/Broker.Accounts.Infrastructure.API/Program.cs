@@ -1,5 +1,6 @@
 using AutoMapper;
 using Broker.Accounts.Application.Create;
+using Broker.Accounts.Application.Find;
 using Broker.Accounts.Domain.Repositories;
 using Broker.Accounts.Infrastructure.API;
 using Broker.Accounts.Infrastructure.SQL;
@@ -48,12 +49,16 @@ builder.Services
 #region Repositories
 
 builder.Services.AddScoped<IAccountRepository, SQLAccountRepository>();
+builder.Services.AddScoped<IIssuerRepository, SQLIssuerRepository>();
+builder.Services.AddScoped<IOrderRepository, SQLOrderRepository>();
 
 #endregion Repositories
 
 #region Ports
 
 builder.Services.AddScoped<IForCreateAccount, AccountCreator>();
+builder.Services.AddScoped<IForCreateOrder, OrderCreator>();
+builder.Services.AddScoped<IForFindAccount, AccountFinder>();
 
 #endregion Ports
 
