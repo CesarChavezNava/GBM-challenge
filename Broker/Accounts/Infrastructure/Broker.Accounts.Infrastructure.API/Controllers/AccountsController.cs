@@ -59,8 +59,8 @@ public class AccountsController : ControllerBase
             new SharePrice(createOrderDto.SharePrice));
 
         Account account = await createOrderPort.Create(writeOrder);
-        BalanceDto currentBalance = mapper.Map<BalanceDto>(account);
+        OrderDto orderDto = mapper.Map<OrderDto>(account);
 
-        return Created("", currentBalance);
+        return Created("", orderDto);
     }
 }

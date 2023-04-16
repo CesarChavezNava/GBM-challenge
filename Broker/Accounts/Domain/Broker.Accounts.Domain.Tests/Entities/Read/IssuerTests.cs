@@ -46,7 +46,7 @@ public class IssuerTests
         issuer.Should().NotBeNull();
         issuer.IssuerName.Value.Should().Be(expected.IssuerName.Value);
         issuer.TotalShares.Value.Should().Be(expected.TotalShares.Value);
-        issuer.SharesPrice.Value.Should().Be(expected.SharesPrice.Value);
+        issuer.SharePrice.Value.Should().Be(expected.SharePrice.Value);
     }
 
     [Test(Description = "Add a issuer to the issuers collection, the first element of the collection should be the same as expected")]
@@ -64,7 +64,7 @@ public class IssuerTests
         issuers.ToArray().SingleOrDefault().Should().NotBeNull();
         issuers.ToArray().SingleOrDefault()?.IssuerName.Value.Should().Be(expected.IssuerName.Value);
         issuers.ToArray().SingleOrDefault()?.TotalShares.Value.Should().Be(expected.TotalShares.Value);
-        issuers.ToArray().SingleOrDefault()?.SharesPrice.Value.Should().Be(expected.SharesPrice.Value);
+        issuers.ToArray().SingleOrDefault()?.SharePrice.Value.Should().Be(expected.SharePrice.Value);
     }
 
     [Test(Description = "Empty issuers collection, should be empty array")]

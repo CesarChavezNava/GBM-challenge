@@ -1,10 +1,13 @@
 using AutoMapper;
 using Broker.Accounts.Application.Create;
 using Broker.Accounts.Application.Find;
+using Broker.Accounts.Domain.Entities.Write;
 using Broker.Accounts.Domain.Repositories;
+using Broker.Accounts.Domain.Rules;
 using Broker.Accounts.Infrastructure.API;
 using Broker.Accounts.Infrastructure.SQL;
 using Broker.Accounts.Infrastructure.SQL.Repositories;
+using Broker.Core.Rules;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,15 +19,6 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-#region DbContext
-
-builder.Services.AddDbContext<AccountContext>(options =>
-{
-    options.UseSqlServer("name=AccountConnection");
-});
-
-#endregion DbContext
 
 #region AutoMapper
 
@@ -38,6 +32,15 @@ builder.Services.AddSingleton(mapper);
 
 #endregion AutoMapper
 
+#region DbContext
+
+builder.Services.AddDbContext<AccountContext>(options =>
+{
+    options.UseSqlServer("name=AccountConnection");
+});
+
+#endregion DbContext
+
 #region FluentValidation
 
 builder.Services
@@ -46,12 +49,11 @@ builder.Services
 
 #endregion FluentValidation
 
-#region Repositories
+#region Policies
 
-builder.Services.AddScoped<IAccountRepository, SQLAccountRepository>();
-builder.Services.AddScoped<IOrderRepository, SQLOrderRepository>();
+builder.Services.AddScoped<Policy<WriteOrder>, OrdersPolicy>();
 
-#endregion Repositories
+#endregion Policies
 
 #region Ports
 
@@ -60,6 +62,13 @@ builder.Services.AddScoped<IForCreateOrder, OrderCreator>();
 builder.Services.AddScoped<IForFindAccount, AccountFinder>();
 
 #endregion Ports
+
+#region Repositories
+
+builder.Services.AddScoped<IAccountRepository, SQLAccountRepository>();
+builder.Services.AddScoped<IOrderRepository, SQLOrderRepository>();
+
+#endregion Repositories
 
 var app = builder.Build();
 

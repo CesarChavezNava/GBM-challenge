@@ -1,8 +1,10 @@
 ﻿using Broker.Accounts.Application.Create.Factory;
+using Broker.Accounts.Application.Create.Helpers;
 using Broker.Accounts.Domain.Entities.Read;
 using Broker.Accounts.Domain.Entities.Write;
 using Broker.Accounts.Domain.Repositories;
 using Broker.Accounts.Domain.ValueObjects;
+using Broker.Core.Rules;
 
 namespace Broker.Accounts.Application.Create;
 
@@ -10,12 +12,15 @@ public class OrderCreator : IForCreateOrder
 {
     private readonly IAccountRepository accountRepository;
     private readonly IOrderRepository orderRepository;
+    private readonly Policy<WriteOrder> policy;
     public OrderCreator(
         IAccountRepository accountRepository,
-        IOrderRepository orderRepository)
+        IOrderRepository orderRepository,
+        Policy<WriteOrder> policy)
     {
         this.accountRepository = accountRepository;
         this.orderRepository = orderRepository;
+        this.policy = policy;
     }
 
     public async Task<Account> Create(WriteOrder order)
@@ -23,17 +28,24 @@ public class OrderCreator : IForCreateOrder
         Account account = await accountRepository.Find(order.UserId);
         IOrderOperationCreator operationCreator = OrderOperationCreatorFactory.Create(order.Operation);
 
+        BusinessErrors businessErrors = policy.Execute(order, operationCreator.GetBusinessRules(account));
+        if(businessErrors.HasErrors())
+        {
+            account.AddBusinessErrors(businessErrors);
+            return account;
+        }
+
         await orderRepository.Create(order);
 
-        WriteIssuer issuer = operationCreator.CreateIssuerForCommand(EvaluateIssuer(account, order), order);
+        WriteIssuer issuerEvaluated = EvaluateIssuer(account, order);
+        WriteIssuer issuer = operationCreator.CreateIssuerForCommand(issuerEvaluated, order);
+
         Cash currentCash = operationCreator.CalculateCurrentCash(account.Cash, order);
         await accountRepository.SaveBalance(new(account.UserId, currentCash), issuer);
 
-
-        UpdateIssuerBalanceInAccount(account, issuer);
+        account.UpdateIssuer(Transformer.FromWriteIssuer(issuer));
         return account.Clone(cash: currentCash);
     }
-
 
     private WriteIssuer EvaluateIssuer(Account account, WriteOrder order)
     {
@@ -43,32 +55,17 @@ public class OrderCreator : IForCreateOrder
         if (issuer is null)
         {
             return new WriteIssuer(
-                new(account.UserId.Value), 
-                new(order.IssuerName.Value), 
-                new(order.TotalShares.Value), 
-                new(order.SharePrice.Value));
+                account.UserId,
+                order.IssuerName,
+                order.TotalShares, 
+                order.SharePrice);
         }
-            
 
         return new WriteIssuer(
-            new(account.UserId.Value), 
-            new(issuer.IssuerName.Value), 
-            new(issuer.TotalShares.Value), 
-            new(issuer.SharesPrice.Value), true);
+            account.UserId, 
+            issuer.IssuerName, 
+            issuer.TotalShares, 
+            issuer.SharePrice, 
+            exists: true);
     }
-
-    private void UpdateIssuerBalanceInAccount(Account account, WriteIssuer writeIssuer)
-    {
-        Issuer? issuer = account.Issuers
-            .FirstOrDefault(issuer => issuer.IssuerName.Value.Equals(writeIssuer.IssuerName.Value));
-  
-        if(issuer is not null)
-            account.Issuers.Remove(issuer);
-
-        account.Issuers.Add(new Issuer(
-            new(writeIssuer.IssuerName.Value), 
-            new(writeIssuer.TotalShares.Value), 
-            new(writeIssuer.SharePrice.Value)));
-    }
-
 }

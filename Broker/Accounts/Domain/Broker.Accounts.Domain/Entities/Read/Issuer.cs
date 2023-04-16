@@ -6,12 +6,12 @@ public class Issuer
 {
     public readonly IssuerName IssuerName;
     public readonly TotalShares TotalShares;
-    public readonly SharePrice SharesPrice;
+    public readonly SharePrice SharePrice;
 
     public Issuer(IssuerName issuerName, TotalShares totalShares, SharePrice sharePrice)
     {
         IssuerName = issuerName;
         TotalShares = totalShares;
-        SharesPrice = sharePrice;
+        SharePrice = sharePrice;
     }
 }
