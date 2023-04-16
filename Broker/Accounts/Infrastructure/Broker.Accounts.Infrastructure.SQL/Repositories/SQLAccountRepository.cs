@@ -26,13 +26,14 @@ public class SQLAccountRepository : IAccountRepository
         context.Accounts.Add(schema);
         await context.SaveChangesAsync();
 
-        return new Account(new UserId(schema.UserId), account.Cash);
+        return new Account(new(schema.UserId), new(account.Cash.Value));
     }
 
     public async Task<Account> Find(UserId userId)
     {
         AccountSchema? accountSchema = await context.Accounts
             .Include(account => account.Issuers)
+            .AsNoTracking()
             .FirstOrDefaultAsync(account => account.UserId == userId.Value);
 
         if (accountSchema is null)
@@ -40,7 +41,7 @@ public class SQLAccountRepository : IAccountRepository
 
         Issuers issuers = new();
         if (accountSchema.Issuers is null)
-            return new Account(userId, new Cash(accountSchema.Balance), issuers);
+            return new Account(new(userId.Value), new(accountSchema.Balance), issuers);
 
         if(accountSchema.Issuers.Count > 0)
         {
@@ -55,6 +56,15 @@ public class SQLAccountRepository : IAccountRepository
                 );
         }
 
-        return new Account(userId, new Cash(accountSchema.Balance), issuers);
+        return new Account(new(userId.Value), new(accountSchema.Balance), issuers);
+    }
+
+    public async Task<Account> Update(WriteAccount account)
+    {
+        AccountSchema schema = mapper.Map<AccountSchema>(account);
+        context.Accounts.Update(schema);
+        await context.SaveChangesAsync();
+
+        return new Account(new(account.UserId.Value), new(account.Cash.Value));
     }
 }

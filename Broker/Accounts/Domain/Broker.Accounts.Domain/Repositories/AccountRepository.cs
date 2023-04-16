@@ -8,4 +8,5 @@ public interface IAccountRepository
 {
     Task<Account> Create(WriteAccount account);
     Task<Account> Find(UserId userId);
+    Task<Account> Update(WriteAccount account);
 }

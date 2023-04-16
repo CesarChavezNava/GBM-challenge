@@ -4,13 +4,17 @@ using Broker.Core.ValueObjects;
 
 namespace Broker.Accounts.Domain.ValueObjects;
 
-public class Operation : ValueObject<OperationCode>
+public class Operation : ValueObjectForEnum<OperationCode>
 {
-    public Operation(OperationCode value)
-        : base(value)
+    public Operation(string value)
+        : base(value, true)
     { }
 
-    protected override void Check(OperationCode value)
+    public Operation(OperationCode value)
+        : base(value)    
+    { }
+
+    protected override void Check(string value)
     {
         if (!Enum.IsDefined(typeof(OperationCode), value))
             throw new InvalidOrderOperationException();

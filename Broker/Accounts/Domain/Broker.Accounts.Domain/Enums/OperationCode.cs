@@ -3,6 +3,5 @@
 public enum OperationCode
 {
     SELL,
-    BUY,
-    ADD_BALANCE
+    BUY
 }

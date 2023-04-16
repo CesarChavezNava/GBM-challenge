@@ -5,4 +5,5 @@ namespace Broker.Accounts.Domain.Repositories;
 public interface IIssuerRepository
 {
     Task Create(WriteIssuer issuer);
+    Task Update(WriteIssuer issuer);
 }
