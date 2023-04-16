@@ -1,17 +1,10 @@
-﻿using Broker.Accounts.Application.Helpers;
+﻿using Broker.Accounts.Application.Create.Factory;
 using Broker.Accounts.Domain.Entities.Read;
 using Broker.Accounts.Domain.Entities.Write;
 using Broker.Accounts.Domain.Repositories;
 using Broker.Accounts.Domain.ValueObjects;
 
 namespace Broker.Accounts.Application.Create;
-
-public interface IOrderOperationCreator
-{
-    Cash CalculateBalanceCash(Cash cash, WriteOrder order);
-    WriteIssuer CreateWriteIssuerForOperation(WriteIssuer issuer, WriteOrder order);
-    Task SaveIssuerBalance(IIssuerRepository issuerRepository, WriteIssuer issuer);
-}
 
 public class OrderCreator : IForCreateOrder
 {
@@ -32,23 +25,21 @@ public class OrderCreator : IForCreateOrder
     {
         Account account = await accountRepository.Find(order.UserId);
 
-        IOrderOperationCreator orderOperationCreator = OrderOperationCreatorFactory.Create(order.Operation.Value);
-
-        WriteIssuer issuer = orderOperationCreator.CreateWriteIssuerForOperation(
-            CreateNewOrGetIssuer(account, order), order);
-
-        await orderOperationCreator.SaveIssuerBalance(issuerRepository, issuer);
         await orderRepository.Create(order);
 
-        Cash currentCash = orderOperationCreator.CalculateBalanceCash(account.Cash, order);
-        await accountRepository.Update(
-            new WriteAccount(new UserId(account.UserId.Value), currentCash));
+        IOrderOperationCreator operationCreator = OrderOperationCreatorFactory.Create(order.Operation);
+
+        WriteIssuer issuer = operationCreator.CreateIssuerForCommand(EvaluateIssuer(account, order), order);
+        Cash currentCash = operationCreator.CalculateCurrentCash(account.Cash, order);
+        await accountRepository.SaveBalance(new(account.UserId, currentCash), issuer);
+
 
         UpdateIssuerBalanceInAccount(account, issuer);
         return account.Clone(cash: currentCash);
     }
 
-    private WriteIssuer CreateNewOrGetIssuer(Account account, WriteOrder order)
+
+    private WriteIssuer EvaluateIssuer(Account account, WriteOrder order)
     {
         Issuer? issuer = account.Issuers
             .FirstOrDefault(issuer => issuer.IssuerName.Value.Equals(order.IssuerName.Value));

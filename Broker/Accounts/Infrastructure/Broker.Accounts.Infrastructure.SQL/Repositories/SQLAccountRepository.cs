@@ -67,4 +67,18 @@ public class SQLAccountRepository : IAccountRepository
 
         return new Account(new(account.UserId.Value), new(account.Cash.Value));
     }
+
+    public async Task SaveBalance(WriteAccount account, WriteIssuer issuer)
+    {
+        AccountSchema accountSchema = mapper.Map<AccountSchema>(account);
+        context.Accounts.Update(accountSchema);
+
+        AccountIssuerSchema issuerSchema = mapper.Map<AccountIssuerSchema>(issuer);
+        if (issuer.Exists)
+            context.Issuers.Update(issuerSchema);
+        else
+            context.Issuers.Add(issuerSchema);
+
+        await context.SaveChangesAsync();
+    }
 }

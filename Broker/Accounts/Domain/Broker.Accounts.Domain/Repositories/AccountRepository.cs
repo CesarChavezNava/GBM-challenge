@@ -8,5 +8,6 @@ public interface IAccountRepository
 {
     Task<Account> Create(WriteAccount account);
     Task<Account> Find(UserId userId);
+    Task SaveBalance(WriteAccount account, WriteIssuer issuer);
     Task<Account> Update(WriteAccount account);
 }
