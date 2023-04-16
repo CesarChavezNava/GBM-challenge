@@ -16,4 +16,30 @@ public class WriteIssuer
         TotalShares = totalShares;
         SharePrice = sharePrice;
     }
+
+    public WriteIssuer CreateWriteIssuerForSellOperation(TotalShares totalShares, SharePrice sharePrice)
+    {
+        int _totalShares = this.TotalShares.Value - totalShares.Value;
+        decimal _sharePrice = (this.SharePrice.Value + sharePrice.Value) / _totalShares;
+
+        return new WriteIssuer(
+                this.UserId,
+                this.IssuerName,
+                new(_totalShares),
+                new(_sharePrice)
+            );
+    }
+
+    public WriteIssuer CreateWriteIssuerForBuyOperation(TotalShares totalShares, SharePrice sharePrice)
+    {
+        int _totalShares = this.TotalShares.Value + totalShares.Value;
+        decimal _sharePrice = (this.SharePrice.Value + sharePrice.Value) / _totalShares;
+
+        return new WriteIssuer(
+                this.UserId,
+                this.IssuerName,
+                new(_totalShares),
+                new(_sharePrice)
+            );
+    }
 }
