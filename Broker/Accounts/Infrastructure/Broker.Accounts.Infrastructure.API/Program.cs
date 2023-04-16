@@ -5,6 +5,7 @@ using Broker.Accounts.Domain.Entities.Write;
 using Broker.Accounts.Domain.Repositories;
 using Broker.Accounts.Domain.Rules;
 using Broker.Accounts.Infrastructure.API;
+using Broker.Accounts.Infrastructure.API.Middlewares;
 using Broker.Accounts.Infrastructure.SQL;
 using Broker.Accounts.Infrastructure.SQL.Repositories;
 using Broker.Core.Rules;
@@ -71,6 +72,12 @@ builder.Services.AddScoped<IOrderRepository, SQLOrderRepository>();
 #endregion Repositories
 
 var app = builder.Build();
+
+#region Custom Middlewares
+
+app.UseMiddleware<ExceptionCatchingMiddleware>();
+
+#endregion Custom Middlewares
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
