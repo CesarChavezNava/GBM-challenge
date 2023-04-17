@@ -10,9 +10,11 @@ public class ExceptionCatchingMiddleware
     private const string INTERNAL_SERVER_ERROR = @"Internal Server Error. The server encountered an unexpected condition that prevented it from fulfilling the request. We apologize for the inconvenience and are working to resolve the issue as soon as possible. Please try again later.";
 
     private readonly RequestDelegate next;
-    public ExceptionCatchingMiddleware(RequestDelegate next)
+    private readonly ILogger logger;
+    public ExceptionCatchingMiddleware(RequestDelegate next, ILogger<ExceptionCatchingMiddleware> logger)
     {
         this.next = next;
+        this.logger = logger;
     }
 
     public async Task InvokeAsync(HttpContext context)
@@ -23,6 +25,9 @@ public class ExceptionCatchingMiddleware
         } 
         catch (Exception exception)
         {
+            logger.LogError(exception.Message);
+            logger.LogInformation(exception.StackTrace);
+
             await HandleException(context, exception);
         }
     }
