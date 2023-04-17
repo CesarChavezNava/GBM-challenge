@@ -71,8 +71,8 @@ Una vez posicionado en la carpeta, ejecutar el siguiente comando para correr las
 dotnet test
 ```
 
-En este momento las pruebas unitarias solo abarcan el dominio o también conocida como la lógica del negocio.  
-Estas pruebas también se ejecutan cada vez que se hace un `push` o `merge` a la rama `main`, mediante una **git action**, la cual genera un reporte de las pruebas.
+En este momento las pruebas unitarias solo abarcan el dominio.  
+Estas pruebas también se ejecutan cada vez que se hace un `push` o `pull request` a la rama `main`, mediante una **git action**, la cual genera un reporte de las pruebas.
 
 ## Dockerizacion 📦
 
@@ -101,3 +101,7 @@ docker-compose up
 La aplicación debería estar escuchando en el puerto **5024**, por lo que la URL del servicio es http://localhost:5024
 
 Si se tiene instalado postman se pueden importar los archivos que se encuentran en la carpeta `Documents\Postman`, este archivo corresponde a una serie de solicitudes a la API.
+
+## Mas información 🎁
+
+Para conocer más acerca del proyecto en la carpeta `Documents` se encuentra la wiki donde se detalla la construcción del proyecto.
