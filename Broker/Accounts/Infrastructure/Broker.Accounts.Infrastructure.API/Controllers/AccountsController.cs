@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
 using Broker.Accounts.Application.Create;
 using Broker.Accounts.Application.Find;
+using Broker.Accounts.Application.Search;
+using Broker.Accounts.Domain.Entities.Criteria;
 using Broker.Accounts.Domain.Entities.Read;
 using Broker.Accounts.Domain.Entities.Write;
 using Broker.Accounts.Domain.ValueObjects;
 using Broker.Accounts.Infrastructure.API.Dtos;
+using Broker.Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Broker.Accounts.Infrastructure.API.Controllers;
@@ -17,15 +20,18 @@ public class AccountsController : ControllerBase
     private readonly IForCreateAccount createAccountPort;
     private readonly IForCreateOrder createOrderPort;
     private readonly IForFindAccount findAccountPort;
+    private readonly IForSearchOrders searchOrdersPort;
     public AccountsController(IMapper mapper, 
         IForCreateAccount createAccountPort,
         IForCreateOrder createOrderPort,
-        IForFindAccount findAccountPort)
+        IForFindAccount findAccountPort,
+        IForSearchOrders searchOrdersPort)
     {
         this.mapper = mapper;
         this.createAccountPort = createAccountPort;
         this.createOrderPort = createOrderPort;
         this.findAccountPort = findAccountPort;
+        this.searchOrdersPort = searchOrdersPort;
     }
 
     [HttpPost]
@@ -62,5 +68,21 @@ public class AccountsController : ControllerBase
         OrderDto orderDto = mapper.Map<OrderDto>(account);
 
         return Created("", orderDto);
+    }
+
+    [HttpGet("{userId}/orders")]
+    public async Task<IActionResult> GetOrders(int userId, [FromQuery] SearchOrdersDto searchOrdersDto)
+    {
+        Criteria<OrderFilters> criteria = new(
+            new OrderFilters(new(userId), searchOrdersDto.IssuerName, searchOrdersDto.Opeartion, searchOrdersDto.MinuteAgo),
+            new(searchOrdersDto.Order ?? "DESC"),
+            searchOrdersDto.Limit != null ? new((int)searchOrdersDto.Limit) : null,
+            searchOrdersDto.Offset != null ? new((int)searchOrdersDto.Offset) : null
+        );
+
+        Orders orders = await searchOrdersPort.Search(criteria);
+        OperationDto[] operationDto = mapper.Map<Order[], OperationDto[]>(orders.ToArray());
+
+        return Ok(operationDto);
     }
 }

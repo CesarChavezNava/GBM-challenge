@@ -1,6 +1,7 @@
 using AutoMapper;
 using Broker.Accounts.Application.Create;
 using Broker.Accounts.Application.Find;
+using Broker.Accounts.Application.Search;
 using Broker.Accounts.Domain.Entities.Write;
 using Broker.Accounts.Domain.Repositories;
 using Broker.Accounts.Domain.Rules;
@@ -61,6 +62,7 @@ builder.Services.AddScoped<Policy<WriteOrder>, OrdersPolicy>();
 builder.Services.AddScoped<IForCreateAccount, AccountCreator>();
 builder.Services.AddScoped<IForCreateOrder, OrderCreator>();
 builder.Services.AddScoped<IForFindAccount, AccountFinder>();
+builder.Services.AddScoped<IForSearchOrders, OrdersSearcher>();
 
 #endregion Ports
 

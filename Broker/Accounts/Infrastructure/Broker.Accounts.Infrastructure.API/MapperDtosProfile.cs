@@ -25,5 +25,12 @@ public class MapperDtosProfile : Profile
         CreateMap<Account, OrderDto>()
             .ForMember(dto => dto.CurrentBalance, entity => entity.MapFrom(src => src))
             .ForMember(dto => dto.BusinessErrors, entity => entity.MapFrom(vo => vo.BusinessErrors.ToArray()));
+
+        CreateMap<Order, OperationDto>()
+            .ForMember(dto => dto.Timestamp, entity => entity.MapFrom(vo => vo.Timestamp.Value))
+            .ForMember(dto => dto.Operation, entity => entity.MapFrom(vo => vo.Operation.Value.ToString()))
+            .ForMember(dto => dto.IssuerName, entity => entity.MapFrom(vo => vo.IssuerName.Value))
+            .ForMember(dto => dto.TotalShares, entity => entity.MapFrom(vo => vo.TotalShares.Value))
+            .ForMember(dto => dto.SharePrice, entity => entity.MapFrom(vo => vo.SharePrice.Value));
     }
 }

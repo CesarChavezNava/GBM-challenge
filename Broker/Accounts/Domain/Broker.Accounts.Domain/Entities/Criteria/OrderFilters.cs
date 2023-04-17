@@ -14,21 +14,21 @@ public class OrderFilters : IFilters
 
     public OrderFilters(
         UserId userId,
-        IssuerName? issuerName = null,
-        Operation? operation = null,
-        Timestamp? timestamp = null,
-        MinutesAgo? minutesAgo = null)
+        string? issuerName = null,
+        string? operation = null,
+        int? minutesAgo = null,
+        long? timestamp = null)
     {
         UserId = userId;
 
         if(issuerName is not null)
-            IssuerName = issuerName;
+            IssuerName = new(issuerName);
 
         if(operation is not null) 
-            Operation = operation;
+            Operation = new(operation);
 
         if(timestamp is not null) 
-            Timestamp = timestamp;
+            Timestamp = new((long)timestamp);
 
         if(minutesAgo is not null)
         {
@@ -41,7 +41,7 @@ public class OrderFilters : IFilters
                 Timestamp = new(milliseconds);
             }
 
-            MinutesAgo = minutesAgo;
+            MinutesAgo = new((int)minutesAgo);
         }
             
     }

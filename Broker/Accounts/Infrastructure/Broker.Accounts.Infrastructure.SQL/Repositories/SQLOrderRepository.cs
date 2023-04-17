@@ -30,7 +30,7 @@ public class SQLOrderRepository : IOrderRepository
         await context.SaveChangesAsync();
     }
 
-    public async Task<Orders> SearchByCriteria(Criteria<OrderFilters> criteria)
+    public async Task<Orders> Search(Criteria<OrderFilters> criteria)
     {
         List<AccountOrderSchema> schemas = new();
         if(criteria.Limit is not null && criteria.Offset is not null) 
@@ -56,6 +56,12 @@ public class SQLOrderRepository : IOrderRepository
                         .Where(Filter(criteria.Filters))
                         .Take(criteria.Offset.Value)
                         .AsNoTracking()
+                        .ToListAsync();
+        } 
+        else
+        {
+            schemas = await context.Orders
+                        .Where(Filter(criteria.Filters))
                         .ToListAsync();
         }
 
