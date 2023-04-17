@@ -17,6 +17,14 @@ Si se usa visual studio code, es recomendable instalar las siguientes extensione
 3. Mono Debug [[Descargar](https://marketplace.visualstudio.com/items?itemName=ms-vscode.mono-debug)]
 4. Code Runner [[Descargar](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner)]
 
+Cambiar el servidor de sql de la cadena de conexión en el archivo `appsettings.development.json` en el proyecto `Broker.Accounts.Infrastructure.API` por el de tu máquina local, si el servidor de sql se llama igual que tu máquina no es necesario cambiarlo.
+
+```
+"ConnectionStrings": {
+    "AccountConnection": "Server=CAMBIAR_POR_NOMBRE_DE_TU_SERVIDOR;Database=BrokerAccounts;Integrated Security=True;TrustServerCertificate=True"
+  }
+```
+
 ## Comenzando 🛠
 
 ### Compilación 🔧
