@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"cash\": 100000\r\n}",
+					"raw": "{\r\n    \"cash\": 10000\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -41,7 +41,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://localhost:{{port}}/api/accounts/1",
+					"raw": "{{protocol}}://localhost:{{port}}/api/accounts/{{userId}}",
 					"protocol": "{{protocol}}",
 					"host": [
 						"localhost"
@@ -50,20 +50,20 @@
 					"path": [
 						"api",
 						"accounts",
-						"1"
+						"{{userId}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Create Order [BUY-AAPL]",
+			"name": "Create Order [BUY/INSUFFICIENT_BALANCE]",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"timestamp\": 1681840800000,\r\n\t\"operation\": \"BUY\",\r\n\t\"issuerName\": \"AAPL\",\r\n\t\"totalShares\": 2,\r\n\t\"sharePrice\": 2899.91\r\n}",
+					"raw": "{\r\n\t\"timestamp\": 1681840800000,\r\n\t\"operation\": \"BUY\",\r\n\t\"issuerName\": \"AAPL\",\r\n\t\"totalShares\": 10,\r\n\t\"sharePrice\": 2899.91\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -71,7 +71,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://localhost:{{port}}/api/accounts/1/orders",
+					"raw": "{{protocol}}://localhost:{{port}}/api/accounts/{{userId}}/orders",
 					"protocol": "{{protocol}}",
 					"host": [
 						"localhost"
@@ -80,7 +80,7 @@
 					"path": [
 						"api",
 						"accounts",
-						"1",
+						"{{userId}}",
 						"orders"
 					]
 				}
@@ -88,13 +88,13 @@
 			"response": []
 		},
 		{
-			"name": "Create Order [BUY-GOOG]",
+			"name": "Create Order [BUY/CLOSED_MARKET]",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"timestamp\": 1681840900000,\r\n\t\"operation\": \"BUY\",\r\n\t\"issuerName\": \"GOOG\",\r\n\t\"totalShares\": 4,\r\n\t\"sharePrice\": 2100.46\r\n}",
+					"raw": "{\r\n\t\"timestamp\": 1681815600000,\r\n\t\"operation\": \"BUY\",\r\n\t\"issuerName\": \"GOOG\",\r\n\t\"totalShares\": 2,\r\n\t\"sharePrice\": 2100.46\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -102,7 +102,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://localhost:{{port}}/api/accounts/1/orders",
+					"raw": "{{protocol}}://localhost:{{port}}/api/accounts/{{userId}}/orders",
 					"protocol": "{{protocol}}",
 					"host": [
 						"localhost"
@@ -111,7 +111,7 @@
 					"path": [
 						"api",
 						"accounts",
-						"1",
+						"{{userId}}",
 						"orders"
 					]
 				}
@@ -119,13 +119,13 @@
 			"response": []
 		},
 		{
-			"name": "Create Order [SELL-GOOG]",
+			"name": "Create Order [1-BUY-GOOG]",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"timestamp\": 1681840900000,\r\n\t\"operation\": \"SELL\",\r\n\t\"issuerName\": \"GOOG\",\r\n\t\"totalShares\": 2,\r\n\t\"sharePrice\": 2501.98\r\n}",
+					"raw": "{\r\n\t\"timestamp\": 1681840800000,\r\n\t\"operation\": \"BUY\",\r\n\t\"issuerName\": \"GOOG\",\r\n\t\"totalShares\": 2,\r\n\t\"sharePrice\": 2100.46\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -133,7 +133,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://localhost:{{port}}/api/accounts/1/orders",
+					"raw": "{{protocol}}://localhost:{{port}}/api/accounts/{{userId}}/orders",
 					"protocol": "{{protocol}}",
 					"host": [
 						"localhost"
@@ -142,7 +142,7 @@
 					"path": [
 						"api",
 						"accounts",
-						"1",
+						"{{userId}}",
 						"orders"
 					]
 				}
@@ -150,12 +150,136 @@
 			"response": []
 		},
 		{
-			"name": "Get Orders",
+			"name": "Create Order [2-BUY-AAPL]",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"timestamp\": 1681840800000,\r\n\t\"operation\": \"BUY\",\r\n\t\"issuerName\": \"AAPL\",\r\n\t\"totalShares\": 1,\r\n\t\"sharePrice\": 2899.91\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://localhost:{{port}}/api/accounts/{{userId}}/orders",
+					"protocol": "{{protocol}}",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"accounts",
+						"{{userId}}",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Order [3-BUY-GOOG]",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"timestamp\": 1681840805000,\r\n\t\"operation\": \"BUY\",\r\n\t\"issuerName\": \"GOOG\",\r\n\t\"totalShares\": 1,\r\n\t\"sharePrice\": 2000.87\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://localhost:{{port}}/api/accounts/{{userId}}/orders",
+					"protocol": "{{protocol}}",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"accounts",
+						"{{userId}}",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Order [SELL/INSUFFICIENT_STOCKS]",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"timestamp\": 1681840900000,\r\n\t\"operation\": \"SELL\",\r\n\t\"issuerName\": \"GOOG\",\r\n\t\"totalShares\": 10,\r\n\t\"sharePrice\": 2501.98\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://localhost:{{port}}/api/accounts/{{userId}}/orders",
+					"protocol": "{{protocol}}",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"accounts",
+						"{{userId}}",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Order [SELL/GOOG]",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"timestamp\": 1681840990000,\r\n\t\"operation\": \"SELL\",\r\n\t\"issuerName\": \"GOOG\",\r\n\t\"totalShares\": 1,\r\n\t\"sharePrice\": 2801.98\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://localhost:{{port}}/api/accounts/{{userId}}/orders",
+					"protocol": "{{protocol}}",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"accounts",
+						"{{userId}}",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Orders [IssuerName=GOOG]",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://localhost:{{port}}/api/accounts/1/orders?IssuerName=AAPL",
+					"raw": "{{protocol}}://localhost:{{port}}/api/accounts/{{userId}}/orders?IssuerName=GOOG",
 					"protocol": "{{protocol}}",
 					"host": [
 						"localhost"
@@ -164,18 +288,135 @@
 					"path": [
 						"api",
 						"accounts",
-						"1",
+						"{{userId}}",
 						"orders"
 					],
 					"query": [
 						{
 							"key": "IssuerName",
-							"value": "AAPL"
+							"value": "GOOG"
 						}
 					]
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get Orders [IssuerName=GOOG&Operation=BUY&Order=ASC]",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{protocol}}://localhost:{{port}}/api/accounts/{{userId}}/orders?IssuerName=GOOG&Operation=BUY&Order=ASC",
+					"protocol": "{{protocol}}",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"accounts",
+						"{{userId}}",
+						"orders"
+					],
+					"query": [
+						{
+							"key": "IssuerName",
+							"value": "GOOG"
+						},
+						{
+							"key": "Operation",
+							"value": "BUY"
+						},
+						{
+							"key": "Order",
+							"value": "ASC"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Orders [IssuerName=GOOG&Operation=BUY&Order=ASC&Limit=1&Offset=1]",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{protocol}}://localhost:{{port}}/api/accounts/{{userId}}/orders?IssuerName=GOOG&Operation=BUY&Order=ASC&Limit=1&Offset=1",
+					"protocol": "{{protocol}}",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"accounts",
+						"{{userId}}",
+						"orders"
+					],
+					"query": [
+						{
+							"key": "IssuerName",
+							"value": "GOOG"
+						},
+						{
+							"key": "Operation",
+							"value": "BUY"
+						},
+						{
+							"key": "Order",
+							"value": "ASC"
+						},
+						{
+							"key": "Limit",
+							"value": "1"
+						},
+						{
+							"key": "Offset",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "protocol",
+			"value": "http",
+			"type": "string"
+		},
+		{
+			"key": "port",
+			"value": "5024",
+			"type": "string"
+		},
+		{
+			"key": "userId",
+			"value": "1",
+			"type": "string"
 		}
 	]
 }
