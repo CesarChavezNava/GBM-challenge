@@ -1,10 +1,8 @@
-.
-
 # GBM Challenge-BackEnd
 
-Una casa de bolsa necesuta tener un servicio API para procesar un conjunto de órdenes de compra-venta.
+Una casa de bolsa necesita tener un servicio API para procesar un conjunto de órdenes de compra/venta.
 
-## Pre-requisitos - Visual Studio 📋
+## Pre-requisitos 📋
 
 1. Visual studio 2022 o Visual Studio Code
 2. SQL Server
