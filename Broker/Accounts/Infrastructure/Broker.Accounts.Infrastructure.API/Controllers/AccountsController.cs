@@ -74,7 +74,7 @@ public class AccountsController : ControllerBase
     public async Task<IActionResult> GetOrders(int userId, [FromQuery] SearchOrdersDto searchOrdersDto)
     {
         Criteria<OrderFilters> criteria = new(
-            new OrderFilters(new(userId), searchOrdersDto.IssuerName, searchOrdersDto.Opeartion),
+            new OrderFilters(new(userId), searchOrdersDto.IssuerName, searchOrdersDto.Operation),
             new(searchOrdersDto.Order ?? "DESC"),
             searchOrdersDto.Limit != null ? new((int)searchOrdersDto.Limit) : null,
             searchOrdersDto.Offset != null ? new((int)searchOrdersDto.Offset) : null

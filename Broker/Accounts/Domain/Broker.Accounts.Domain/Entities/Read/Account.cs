@@ -71,7 +71,7 @@ public class Account
     public void UpdateIssuer(Issuer issuer)
     {
         Issuer? oldIssuer = this.Issuers
-            .FirstOrDefault(issuer => issuer.IssuerName.Value.Equals(issuer.IssuerName.Value));
+            .FirstOrDefault(i => i.IssuerName.Value.Equals(issuer.IssuerName.Value));
 
         if (oldIssuer is not null)
             this.Issuers.Remove(oldIssuer);
