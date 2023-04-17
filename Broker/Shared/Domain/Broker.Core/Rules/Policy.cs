@@ -27,5 +27,11 @@ public abstract class Policy<TInput>
         return errors;
     }
 
+    /// <summary>
+    /// Method that validates the contexts under which a rule can be executed
+    /// </summary>
+    /// <param name="entity">Validation target entity</param>
+    /// <param name="rule">Rule to be validated</param>
+    /// <returns></returns>
     protected abstract bool ValidateContexts(TInput entity, IBusinessRule<TInput> rule);
 }

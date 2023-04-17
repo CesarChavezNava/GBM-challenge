@@ -3,6 +3,6 @@
 public class SearchOffsetOutOfRangeException : ArgumentOutOfRangeException
 {
     public SearchOffsetOutOfRangeException() :
-        base("The search offset is out of the allowed range.")
+        base("Search offset out of allowed range.")
     { }
 }

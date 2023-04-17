@@ -3,6 +3,6 @@
 public class SearchLimitOutOfRangeException : ArgumentOutOfRangeException
 {
     public SearchLimitOutOfRangeException() :
-        base("The search limit is out of the allowed range.")
+        base("Search limit out of allowed range.")
     { }
 }

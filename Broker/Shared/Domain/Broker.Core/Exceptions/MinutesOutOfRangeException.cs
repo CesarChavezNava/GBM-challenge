@@ -3,6 +3,6 @@
 public class MinutesOutOfRangeException : ArgumentOutOfRangeException
 {
     public MinutesOutOfRangeException() :
-        base("Minutes are out of range.")
+        base("Minutes out of range.")
     { }
 }
