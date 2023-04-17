@@ -7,10 +7,7 @@ namespace Broker.Accounts.Infrastructure.API.Middlewares;
 
 public class ExceptionCatchingMiddleware
 {
-    private const string INTERNAL_SERVER_ERROR = @"Internal Server Error. 
-        The server encountered an unexpected condition that prevented it from fulfilling the request. 
-        We apologize for the inconvenience and are working to resolve the issue as soon as possible. 
-        Please try again later.";
+    private const string INTERNAL_SERVER_ERROR = @"Internal Server Error. The server encountered an unexpected condition that prevented it from fulfilling the request. We apologize for the inconvenience and are working to resolve the issue as soon as possible. Please try again later.";
 
     private readonly RequestDelegate next;
     public ExceptionCatchingMiddleware(RequestDelegate next)
@@ -39,7 +36,11 @@ public class ExceptionCatchingMiddleware
             InsufficientSharesException or
             InvalidOrderOperationException or
             InvalidStockSymbolException or
+            InvalidSearchOrderCodeException or
             InvalidUserIdException or
+            MinutesOutOfRangeException or
+            SearchLimitOutOfRangeException or
+            SearchOffsetOutOfRangeException or
             TimestampOutOfRangeException or
             TooLowSharePriceException => HttpStatusCode.BadRequest,
             UserNotFoundException => HttpStatusCode.NotFound,
