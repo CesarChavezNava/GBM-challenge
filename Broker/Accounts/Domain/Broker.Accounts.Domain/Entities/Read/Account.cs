@@ -7,7 +7,7 @@ public class Account
 {
     public readonly UserId UserId;
     public readonly Cash Cash;
-    public readonly Issuers Issuers;
+    public Issuers Issuers { get; private set; }
     
     public Orders Orders { get; private set; }
     public BusinessErrors? BusinessErrors { get; private set; }
@@ -54,7 +54,7 @@ public class Account
 
     public void AddOrders(Orders orders)
     {
-        Orders = orders;
+
     }
 
     public Account Clone(UserId? userId = null, Cash? cash = null, Issuers? issuers = null)
@@ -74,8 +74,8 @@ public class Account
             .FirstOrDefault(issuer => issuer.IssuerName.Value.Equals(issuer.IssuerName.Value));
 
         if (oldIssuer is not null)
-            this.Issuers.Remove(issuer);
-
+            this.Issuers.Remove(oldIssuer);
+        
         this.Issuers.Add(new Issuer(
             new(issuer.IssuerName.Value),
             new(issuer.TotalShares.Value),

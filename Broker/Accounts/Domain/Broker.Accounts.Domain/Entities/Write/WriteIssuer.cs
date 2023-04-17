@@ -31,13 +31,13 @@ public class WriteIssuer
     public WriteIssuer CreateWriteIssuerForSellOperation(TotalShares totalShares, SharePrice sharePrice)
     {
         int currentTotalShares = TotalShares.Value - totalShares.Value;
-        decimal averageSharePrice = (SharePrice.Value + sharePrice.Value) / currentTotalShares;
 
         return new WriteIssuer(
                 UserId,
                 IssuerName,
                 new(currentTotalShares),
-                new(averageSharePrice)
+                sharePrice,
+                true
             );
     }
 
@@ -47,13 +47,12 @@ public class WriteIssuer
             return this;
 
         int currentTotalShares = TotalShares.Value + totalShares.Value;
-        decimal averageSharePrice = (SharePrice.Value + sharePrice.Value) / currentTotalShares;
 
         return new WriteIssuer(
                 UserId,
                 IssuerName,         
                 new(currentTotalShares),
-                new(averageSharePrice),
+                sharePrice,
                 this.Exists
             );
     }
