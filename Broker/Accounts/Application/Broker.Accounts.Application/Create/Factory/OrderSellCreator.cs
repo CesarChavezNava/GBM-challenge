@@ -24,6 +24,7 @@ public class OrderSellCreator : IOrderOperationCreator
         return new IBusinessRule<WriteOrder>[]
         {
             new ClosedMarketRule(),
+            new DuplicateOperationRule(accountAsAdditionalData),
             new InsufficientStocksRule(accountAsAdditionalData)
         };
     }

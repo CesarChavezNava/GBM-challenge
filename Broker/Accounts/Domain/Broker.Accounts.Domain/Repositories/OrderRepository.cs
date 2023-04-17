@@ -8,5 +8,5 @@ namespace Broker.Accounts.Domain.Repositories;
 public interface IOrderRepository
 {
     Task Create(WriteOrder order);
-    Task<Orders> SearchByCriteria(Criteria<OrderFilters> criteria);
+    Task<Orders> Search(Criteria<OrderFilters> criteria);
 }

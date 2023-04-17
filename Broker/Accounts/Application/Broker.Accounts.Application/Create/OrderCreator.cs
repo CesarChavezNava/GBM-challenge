@@ -1,9 +1,11 @@
 ﻿using Broker.Accounts.Application.Create.Factory;
 using Broker.Accounts.Application.Create.Helpers;
+using Broker.Accounts.Domain.Entities.Criteria;
 using Broker.Accounts.Domain.Entities.Read;
 using Broker.Accounts.Domain.Entities.Write;
 using Broker.Accounts.Domain.Repositories;
 using Broker.Accounts.Domain.ValueObjects;
+using Broker.Core.Entities;
 using Broker.Core.Rules;
 
 namespace Broker.Accounts.Application.Create;
@@ -25,9 +27,9 @@ public class OrderCreator : IForCreateOrder
 
     public async Task<Account> Create(WriteOrder order)
     {
-        Account account = await accountRepository.Find(order.UserId);
-        IOrderOperationCreator operationCreator = OrderOperationCreatorFactory.Create(order.Operation);
+        Account account = await FindAccountWithOrders(order);
 
+        IOrderOperationCreator operationCreator = OrderOperationCreatorFactory.Create(order.Operation);
         BusinessErrors businessErrors = policy.Execute(order, operationCreator.GetBusinessRules(account));
         if(businessErrors.HasErrors())
         {
@@ -57,15 +59,26 @@ public class OrderCreator : IForCreateOrder
             return new WriteIssuer(
                 account.UserId,
                 order.IssuerName,
-                order.TotalShares, 
+                order.TotalShares,
                 order.SharePrice);
         }
 
         return new WriteIssuer(
-            account.UserId, 
-            issuer.IssuerName, 
-            issuer.TotalShares, 
-            issuer.SharePrice, 
+            account.UserId,
+            issuer.IssuerName,
+            issuer.TotalShares,
+            issuer.SharePrice,
             exists: true);
+    }
+
+    private async Task<Account> FindAccountWithOrders(WriteOrder order)
+    {
+        Account account = await accountRepository.Find(order.UserId);
+        Orders orders = await orderRepository.Search(new Criteria<OrderFilters>(
+                new(account.UserId, order.IssuerName.Value, order.Operation.Value.ToString(), 5, order.Timestamp.Value)
+            ));
+        account.AddOrders(orders);
+
+        return account;
     }
 }
