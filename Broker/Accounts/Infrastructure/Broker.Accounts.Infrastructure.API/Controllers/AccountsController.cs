@@ -67,7 +67,9 @@ public class AccountsController : ControllerBase
         Account account = await createOrderPort.Create(writeOrder);
         OrderDto orderDto = mapper.Map<OrderDto>(account);
 
-        return Created("", orderDto);
+        return  orderDto.BusinessErrors != null && orderDto.BusinessErrors.Length > 0 ?
+                Ok(orderDto) :
+                Created("", orderDto);
     }
 
     [HttpGet("{userId}/orders")]
