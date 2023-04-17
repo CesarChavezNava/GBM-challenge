@@ -54,7 +54,7 @@ public class Account
 
     public void AddOrders(Orders orders)
     {
-
+        Orders = orders;
     }
 
     public Account Clone(UserId? userId = null, Cash? cash = null, Issuers? issuers = null)
