@@ -15,6 +15,10 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(5024);
+});
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -74,6 +78,17 @@ builder.Services.AddScoped<IOrderRepository, SQLOrderRepository>();
 #endregion Repositories
 
 var app = builder.Build();
+
+#region Migrations
+
+// Migrations
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<AccountContext>();
+    context.Database.Migrate();
+}
+
+#endregion Migrations
 
 #region Custom Middlewares
 

@@ -1,0 +1,33 @@
+version: "3"
+services:
+  sqlserver:
+    container_name: "sqlserver"
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      SA_PASSWORD: "Ch4ll3ng3p4sword!"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    networks:
+      - broker-network
+    volumes:
+      - ./sqlserver:/var/opt/mssql/data
+  broker.api:
+    container_name: "broker.api"
+    image: broker
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - TZ=America/Mexico_City
+    depends_on:
+      - "sqlserver"
+    ports:
+      - "5024:5024"
+    networks:
+      - broker-network
+networks:
+  broker-network:
+    driver: bridge
+volumes:
+  dbdata:
