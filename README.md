@@ -71,7 +71,6 @@ Una vez posicionado en la carpeta, ejecutar el siguiente comando para correr las
 dotnet test
 ```
 
-En este momento las pruebas unitarias solo abarcan el dominio.  
 Estas pruebas también se ejecutan cada vez que se hace un `push` o `pull request` a la rama `main`, mediante una **git action**, la cual genera un reporte de las pruebas.
 
 ## Dockerizacion 📦
@@ -104,4 +103,4 @@ Si se tiene instalado postman se pueden importar los archivos que se encuentran 
 
 ## Mas información 🎁
 
-Para conocer más acerca del proyecto en la carpeta `Documents` se encuentra la wiki donde se detalla la construcción del proyecto.
+Para conocer más acerca del proyecto en la carpeta `Documents` se encuentra UN **README** donde se detalla la construcción del proyecto.
