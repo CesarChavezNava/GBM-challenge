@@ -10,6 +10,7 @@ COPY Shared/Domain/Broker.Core/*.csproj ./Shared/Domain/Broker.Core/
 COPY Accounts/Domain/Broker.Accounts.Domain/*.csproj ./Accounts/Domain/Broker.Accounts.Domain/
 COPY Accounts/Domain/Broker.Accounts.Domain.Tests/*.csproj ./Accounts/Domain/Broker.Accounts.Domain.Tests/
 COPY Accounts/Application/Broker.Accounts.Application/*.csproj ./Accounts/Application/Broker.Accounts.Application/
+COPY Accounts/Application/Broker.Accounts.Application.Tests/*.csproj ./Accounts/Application/Broker.Accounts.Application.Tests/
 COPY Accounts/Infrastructure/Broker.Accounts.Infrastructure.SQL/*.csproj ./Accounts/Infrastructure/Broker.Accounts.Infrastructure.SQL/
 COPY Accounts/Infrastructure/Broker.Accounts.Infrastructure.API/*.csproj ./Accounts/Infrastructure/Broker.Accounts.Infrastructure.API/
 

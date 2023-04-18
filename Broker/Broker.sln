@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Broker.Accounts.Infrastruct
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Broker.Accounts.Domain.Tests", "Accounts\Domain\Broker.Accounts.Domain.Tests\Broker.Accounts.Domain.Tests.csproj", "{DA42D3B4-E81E-4212-B96D-F53D7F2D047A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Broker.Accounts.Application.Tests", "Accounts\Application\Broker.Accounts.Application.Tests\Broker.Accounts.Application.Tests.csproj", "{1390ED73-7850-4D83-96B1-A0BEE0BC995E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{DA42D3B4-E81E-4212-B96D-F53D7F2D047A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA42D3B4-E81E-4212-B96D-F53D7F2D047A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA42D3B4-E81E-4212-B96D-F53D7F2D047A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1390ED73-7850-4D83-96B1-A0BEE0BC995E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1390ED73-7850-4D83-96B1-A0BEE0BC995E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1390ED73-7850-4D83-96B1-A0BEE0BC995E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1390ED73-7850-4D83-96B1-A0BEE0BC995E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,6 +78,7 @@ Global
 		{7DE7BA6C-E027-4ED6-BACF-B93AB70DE482} = {AFF84863-1217-4057-AC53-828203B390CB}
 		{052D2355-2A60-49AA-BA64-C5C29A1BFFFE} = {AFF84863-1217-4057-AC53-828203B390CB}
 		{DA42D3B4-E81E-4212-B96D-F53D7F2D047A} = {66DBF917-B9EC-4276-818E-A39A895C2049}
+		{1390ED73-7850-4D83-96B1-A0BEE0BC995E} = {C4263C4F-0BC9-427E-8E8E-23F14027B8B6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {49C0D1AF-A17C-4B16-B892-8BB90EEC6F97}
